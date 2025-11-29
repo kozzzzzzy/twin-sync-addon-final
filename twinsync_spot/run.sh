@@ -26,7 +26,7 @@ export DATA_DIR="/data"
 # Get ingress path from supervisor if available
 if [ -n "$SUPERVISOR_TOKEN" ]; then
     INGRESS_INFO=$(curl -s -H "Authorization: Bearer ${SUPERVISOR_TOKEN}" http://supervisor/addons/self/info 2>/dev/null || echo "{}")
-    INGRESS_ENTRY=$(echo "$INGRESS_INFO" | python3 -c "import sys, json; print(json.load(sys.stdin).get('ingress_entry', ''))" 2>/dev/null || echo "")
+    INGRESS_ENTRY=$(echo "$INGRESS_INFO" | python3 -c "import sys, json; print(json.load(sys. stdin).get('data', {}). get('ingress_entry', ''))" 2>/dev/null || echo "")
     if [ -n "$INGRESS_ENTRY" ]; then
         export INGRESS_PATH="$INGRESS_ENTRY"
         echo "Ingress path: $INGRESS_PATH"
