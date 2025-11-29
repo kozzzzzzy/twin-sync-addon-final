@@ -25,6 +25,15 @@ TEMPLATES_DIR = APP_DIR / "web" / "templates"
 db: Database = None
 
 
+def get_ingress_path(request: Request) -> str:
+    """Resolve the ingress path from env or ingress headers."""
+    if INGRESS_PATH:
+        return INGRESS_PATH.rstrip("/")
+
+    header_path = request.headers.get("X-Ingress-Path", "").rstrip("/")
+    return header_path
+
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Application lifespan - startup and shutdown."""
@@ -73,11 +82,13 @@ app.include_router(api_router, prefix=f"{INGRESS_PATH}/api" if INGRESS_PATH else
 @app.get(f"{INGRESS_PATH}/" if INGRESS_PATH else "/", response_class=HTMLResponse)
 async def index(request: Request):
     """Main page."""
+    ingress_path = get_ingress_path(request)
+
     return templates.TemplateResponse(
         "index.html",
         {
             "request": request,
-            "ingress_path": INGRESS_PATH,
+            "ingress_path": ingress_path,
         }
     )
 
@@ -85,11 +96,13 @@ async def index(request: Request):
 @app.get(f"{INGRESS_PATH}/add" if INGRESS_PATH else "/add", response_class=HTMLResponse)
 async def add_spot_page(request: Request):
     """Add spot page."""
+    ingress_path = get_ingress_path(request)
+
     return templates.TemplateResponse(
         "add_spot.html",
         {
             "request": request,
-            "ingress_path": INGRESS_PATH,
+            "ingress_path": ingress_path,
         }
     )
 
@@ -97,12 +110,14 @@ async def add_spot_page(request: Request):
 @app.get(f"{INGRESS_PATH}/spot/{{spot_id}}" if INGRESS_PATH else "/spot/{spot_id}", response_class=HTMLResponse)
 async def spot_detail_page(request: Request, spot_id: int):
     """Spot detail page."""
+    ingress_path = get_ingress_path(request)
+
     return templates.TemplateResponse(
         "spot_detail.html",
         {
             "request": request,
             "spot_id": spot_id,
-            "ingress_path": INGRESS_PATH,
+            "ingress_path": ingress_path,
         }
     )
 
@@ -113,11 +128,13 @@ async def settings_page(request: Request):
     gemini_key = os.environ.get("GEMINI_API_KEY", "")
     has_key = bool(gemini_key and len(gemini_key) > 10)
     
+    ingress_path = get_ingress_path(request)
+
     return templates.TemplateResponse(
         "settings.html",
         {
             "request": request,
-            "ingress_path": INGRESS_PATH,
+            "ingress_path": ingress_path,
             "has_api_key": has_key,
             "mode": "addon" if os.environ.get("SUPERVISOR_TOKEN") else "standalone",
         }

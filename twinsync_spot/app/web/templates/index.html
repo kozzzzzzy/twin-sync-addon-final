@@ -16,7 +16,7 @@
     <div class="empty-icon">📍</div>
     <h2>No spots yet</h2>
     <p>Add your first spot to start tracking!</p>
-    <a href="{{ ingress_path }}/add" class="btn btn-primary">+ Add Your First Spot</a>
+    <a href="{{ ingress_path + '/add' if ingress_path else 'add' }}" class="btn btn-primary">+ Add Your First Spot</a>
 </div>
 {% endblock %}
 
