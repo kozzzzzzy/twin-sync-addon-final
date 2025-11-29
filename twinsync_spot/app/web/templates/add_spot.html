@@ -53,7 +53,7 @@
     </div>
     
     <div class="form-actions">
-        <a href="{{ ingress_path }}/" class="btn btn-secondary">Cancel</a>
+        <a href="{{ ingress_path + '/' if ingress_path else './' }}" class="btn btn-secondary">Cancel</a>
         <button type="submit" class="btn btn-primary">Create Spot</button>
     </div>
 </form>

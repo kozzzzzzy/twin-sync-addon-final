@@ -1,7 +1,20 @@
 /* TwinSync Spot - Client JavaScript */
 
-// Get ingress path from global or default to empty
-const BASE_PATH = typeof INGRESS_PATH !== 'undefined' ? INGRESS_PATH : '';
+// Resolve ingress/base path even when the server couldn't inject it
+function detectBasePath() {
+    if (typeof INGRESS_PATH !== 'undefined' && INGRESS_PATH) {
+        return INGRESS_PATH;
+    }
+
+    const match = window.location.pathname.match(/^\/api\/hassio_ingress\/[^/]+/);
+    if (match) {
+        return match[0];
+    }
+
+    return '';
+}
+
+const BASE_PATH = detectBasePath();
 
 /**
  * Make API request

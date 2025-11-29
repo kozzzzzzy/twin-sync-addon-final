@@ -4,19 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}TwinSync Spot{% endblock %}</title>
-    <link rel="stylesheet" href="{{ ingress_path }}/static/css/style.css">
+    {% set static_css = ingress_path + '/static/css/style.css' if ingress_path else 'static/css/style.css' %}
+    <link rel="stylesheet" href="{{ static_css }}">
 </head>
 <body>
     <header class="header">
         <div class="header-content">
-            <a href="{{ ingress_path }}/" class="logo">
+            <a href="{{ ingress_path + '/' if ingress_path else './' }}" class="logo">
                 <span class="logo-icon">📍</span>
                 <span class="logo-text">TwinSync Spot</span>
             </a>
             <nav class="nav">
-                <a href="{{ ingress_path }}/" class="nav-link">Spots</a>
-                <a href="{{ ingress_path }}/add" class="nav-link nav-link-add">+ Add Spot</a>
-                <a href="{{ ingress_path }}/settings" class="nav-link">⚙️</a>
+                <a href="{{ ingress_path + '/' if ingress_path else './' }}" class="nav-link">Spots</a>
+                <a href="{{ ingress_path + '/add' if ingress_path else 'add' }}" class="nav-link nav-link-add">+ Add Spot</a>
+                <a href="{{ ingress_path + '/settings' if ingress_path else 'settings' }}" class="nav-link">⚙️</a>
             </nav>
         </div>
     </header>
@@ -27,7 +28,8 @@
     
     <div id="toast-container"></div>
     
-    <script src="{{ ingress_path }}/static/js/app.js"></script>
+    {% set static_js = ingress_path + '/static/js/app.js' if ingress_path else 'static/js/app.js' %}
+    <script src="{{ static_js }}"></script>
     {% block scripts %}{% endblock %}
 </body>
 </html>
