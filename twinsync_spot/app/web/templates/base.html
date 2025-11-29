@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}TwinSync Spot{% endblock %}</title>
+    <link rel="stylesheet" href="{{ ingress_path }}/static/css/style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="{{ ingress_path }}/" class="logo">
+                <span class="logo-icon">📍</span>
+                <span class="logo-text">TwinSync Spot</span>
+            </a>
+            <nav class="nav">
+                <a href="{{ ingress_path }}/" class="nav-link">Spots</a>
+                <a href="{{ ingress_path }}/add" class="nav-link nav-link-add">+ Add Spot</a>
+                <a href="{{ ingress_path }}/settings" class="nav-link">⚙️</a>
+            </nav>
+        </div>
+    </header>
+    
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+    
+    <div id="toast-container"></div>
+    
+    <script src="{{ ingress_path }}/static/js/app.js"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

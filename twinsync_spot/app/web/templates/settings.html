@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}Settings - TwinSync Spot{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Settings</h1>
+</div>
+
+<div class="settings-content">
+    <div class="settings-section">
+        <h2>API Status</h2>
+        <div class="status-card">
+            <div class="status-item">
+                <span class="status-label">Gemini API Key:</span>
+                <span class="status-value {{ 'status-ok' if has_api_key else 'status-error' }}">
+                    {{ '✅ Configured' if has_api_key else '❌ Not configured' }}
+                </span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">Mode:</span>
+                <span class="status-value">{{ mode | title }}</span>
+            </div>
+        </div>
+        
+        {% if not has_api_key %}
+        <div class="alert alert-warning">
+            <p><strong>API Key Required</strong></p>
+            <p>To use TwinSync Spot, you need to configure a Gemini API key in the add-on configuration.</p>
+            <ol>
+                <li>Go to <strong>Settings → Add-ons → TwinSync Spot → Configuration</strong></li>
+                <li>Enter your Gemini API key</li>
+                <li>Restart the add-on</li>
+            </ol>
+            <p><a href="https://makersuite.google.com/app/apikey" target="_blank">Get a Gemini API key →</a></p>
+        </div>
+        {% endif %}
+    </div>
+    
+    <div class="settings-section">
+        <h2>About</h2>
+        <p><strong>TwinSync Spot</strong> v1.0.1</p>
+        <p>Compare camera snapshots to YOUR description of how a space should look.</p>
+        <p>
+            <a href="https://github.com/kozzzzzzy/twin-sync-addon" target="_blank">GitHub →</a>
+        </p>
+    </div>
+    
+    <div class="settings-section">
+        <h2>API Costs</h2>
+        <p>TwinSync Spot uses the <strong>Gemini 2.0 Flash</strong> model.</p>
+        <p>Typical cost: ~$0.001 per check (image + text analysis)</p>
+        <p>Google offers a generous free tier for Gemini API.</p>
+    </div>
+</div>
+{% endblock %}

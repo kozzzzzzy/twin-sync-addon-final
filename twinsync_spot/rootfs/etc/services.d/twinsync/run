@@ -1,0 +1,26 @@
+#!/usr/bin/with-contenv bashio
+# ==============================================================================
+# TwinSync Spot - s6-overlay service runner
+# ==============================================================================
+
+bashio::log.info "Starting TwinSync Spot..."
+
+# Get config from HA add-on options
+GEMINI_API_KEY=$(bashio::config 'gemini_api_key')
+
+# Export for Python app
+export GEMINI_API_KEY
+export SUPERVISOR_TOKEN="${SUPERVISOR_TOKEN}"
+export DATA_DIR="/data"
+
+# Set ingress path if available
+if bashio::var.has_value "$(bashio::addon.ingress_entry)"; then
+    export INGRESS_PATH="$(bashio::addon.ingress_entry)"
+    bashio::log.info "Ingress path: ${INGRESS_PATH}"
+fi
+
+bashio::log.info "Starting FastAPI server on port 8099..."
+
+# Run the FastAPI app
+cd /app
+exec python3 -m uvicorn app.main:app --host 0.0.0.0 --port 8099
