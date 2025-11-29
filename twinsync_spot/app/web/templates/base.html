@@ -18,6 +18,10 @@
                 <a href="{{ ingress_path + '/' if ingress_path else './' }}" class="nav-link">Spots</a>
                 <a href="{{ ingress_path + '/add' if ingress_path else 'add' }}" class="nav-link nav-link-add">+ Add Spot</a>
                 <a href="{{ ingress_path + '/settings' if ingress_path else 'settings' }}" class="nav-link">⚙️</a>
+                <button class="nav-link theme-toggle" type="button" id="theme-toggle" aria-label="Toggle color theme">
+                    <span class="theme-toggle__icon" aria-hidden="true">🌙</span>
+                    <span class="theme-toggle__label">Dark</span>
+                </button>
             </nav>
         </div>
     </header>

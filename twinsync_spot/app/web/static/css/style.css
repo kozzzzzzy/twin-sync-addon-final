@@ -1,18 +1,34 @@
 /* TwinSync Spot - Stylesheet */
 
+@import url('https://fonts.cdnfonts.com/css/linux-libertine');
+
 :root {
-    --color-bg: #1a1a2e;
-    --color-surface: #16213e;
-    --color-surface-alt: #0f3460;
-    --color-primary: #e94560;
-    --color-success: #4ade80;
+    --color-bg: #f5efe7;
+    --color-surface: #fff8ef;
+    --color-surface-alt: #efe3d2;
+    --color-primary: #2dd4bf;
+    --color-success: #2dd4bf;
     --color-warning: #fbbf24;
-    --color-error: #ef4444;
-    --color-text: #f1f5f9;
-    --color-text-muted: #94a3b8;
-    --color-border: #334155;
+    --color-error: #f97373;
+    --color-text: #1f2933;
+    --color-text-muted: #55606e;
+    --color-border: #d9c8b3;
     --radius: 8px;
-    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+    --shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="dark"] {
+    --color-bg: #0d121a;
+    --color-surface: #121926;
+    --color-surface-alt: #1b2535;
+    --color-primary: #2dd4bf;
+    --color-success: #2dd4bf;
+    --color-warning: #fbbf24;
+    --color-error: #f97373;
+    --color-text: #f1f5f9;
+    --color-text-muted: #cbd5e1;
+    --color-border: #233044;
+    --shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
 }
 
 * {
@@ -22,11 +38,12 @@
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-family: 'Linux Libertine', 'Linux Libertine O', 'Times New Roman', serif;
     background: var(--color-bg);
     color: var(--color-text);
     line-height: 1.6;
     min-height: 100vh;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Header */
@@ -73,6 +90,7 @@ body {
     padding: 0.5rem 1rem;
     border-radius: var(--radius);
     transition: all 0.2s;
+    border: 1px solid transparent;
 }
 
 .nav-link:hover {
@@ -86,8 +104,24 @@ body {
 }
 
 .nav-link-add:hover {
-    background: #d1364d;
+    background: #22bfa8;
     color: white;
+}
+
+.theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    color: var(--color-text);
+    cursor: pointer;
+    font: inherit;
+}
+
+.theme-toggle:hover {
+    background: var(--color-surface-alt);
+    color: var(--color-text);
 }
 
 /* Container */
@@ -130,7 +164,7 @@ body {
 }
 
 .btn-primary:hover {
-    background: #d1364d;
+    background: #22bfa8;
 }
 
 .btn-secondary {
@@ -144,11 +178,11 @@ body {
 
 .btn-success {
     background: var(--color-success);
-    color: #064e3b;
+    color: #0f3b35;
 }
 
 .btn-success:hover {
-    background: #22c55e;
+    background: #22bfa8;
 }
 
 .btn-muted {
@@ -167,7 +201,7 @@ body {
 }
 
 .btn-danger:hover {
-    background: #dc2626;
+    background: #f25f5f;
 }
 
 .btn-small {
@@ -282,7 +316,7 @@ body {
 
 /* Error */
 .error {
-    background: rgba(239, 68, 68, 0.1);
+    background: rgba(249, 115, 115, 0.12);
     border: 1px solid var(--color-error);
     border-radius: var(--radius);
     padding: 1rem;
@@ -367,7 +401,7 @@ body {
 
 .voice-option.selected {
     border-color: var(--color-primary);
-    background: rgba(233, 69, 96, 0.1);
+    background: rgba(45, 212, 191, 0.12);
 }
 
 .voice-emoji {
