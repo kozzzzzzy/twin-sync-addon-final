@@ -14,6 +14,9 @@
                 <span class="logo-icon">📍</span>
                 <span class="logo-text">TwinSync Spot</span>
             </a>
+            <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+                <span class="nav-toggle__icon" aria-hidden="true">☰</span>
+            </button>
             <nav class="nav">
                 <a href="{{ ingress_path + '/' if ingress_path else './' }}" class="nav-link">Spots</a>
                 <a href="{{ ingress_path + '/add' if ingress_path else 'add' }}" class="nav-link nav-link-add">+ Add Spot</a>
